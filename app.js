@@ -1,7 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
-const layoutFunc = require('./views/layout.js')
+const index = require('./views/index.js')
 const {db, Page, User} = require('./models');
+const wikiRoutes = require('./routes/wiki')
+const userRoutes = require('./routes/user')
 
 
 const app = express();
@@ -12,8 +14,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
+app.use('/wiki', wikiRoutes)
+app.use('/users', userRoutes)
+
 app.get('/', (req, res) => {
-  res.send(layoutFunc('asdfasdfasd'))
+  res.send(index.layoutFunc())
 })
 
 
