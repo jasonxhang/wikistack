@@ -1,7 +1,7 @@
 const html = require("html-template-tag");
 const layout = require("./layout");
 
-module.exports = (pages) => layout(html`
+module.exports = (posts) => layout(html`
   <h3>Pages</h3>
   <hr>
   <form method="GET" action="/wiki/search">
@@ -11,6 +11,15 @@ module.exports = (pages) => layout(html`
   <hr>
   <ul class="list-unstyled">
     <ul>
-      <!-- PLACEHOLDER LIST OF PAGES -->
+    ${posts.map(post => html`
+    <div class='news-item'>
+      <p>
+        <span class="news-position">${post.id}. ▲</span>
+        <a href="/posts/${post.id}">${post.title}</a>
+        <small>(by ${post.name})</small>
+      </p>
+    </div>`
+  )}
     </ul>
   </ul>`);
+

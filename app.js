@@ -18,7 +18,7 @@ app.use('/wiki', wikiRoutes)
 app.use('/users', userRoutes)
 
 app.get('/', (req, res) => {
-  res.send(index.layoutFunc())
+  res.redirect('/wiki')
 })
 
 
