@@ -1,5 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
+const layoutFunc = require('./views/layout.js')
+const {db, Page, User} = require('./models');
+
 
 const app = express();
 
@@ -10,13 +13,23 @@ app.use(express.json());
 
 
 app.get('/', (req, res) => {
-  console.log("hello world");
+  res.send(layoutFunc('asdfasdfasd'))
 })
 
 
 const PORT = 3000;
 
-app.listen(PORT, () => {
-  console.log(`App listening in port ${PORT}`);
-});
+const init = async () => {
+  await Page.sync()
+  await User.sync()
+  app.listen(PORT, () => {
+    console.log(`App listening in port ${PORT}`);
+  });
+}
+
+init();
+
+
+
+
 
